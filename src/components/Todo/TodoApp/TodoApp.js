@@ -8,7 +8,8 @@ class TodoApp extends React.Component {
         {id: 1, name:'Show demo for react application.', isComplete: true},
         {id: 2, name:'Ship it.', isComplete: false},
         {id: 3, name:'Build an awesome App!', isComplete: true}
-      ]
+      ],
+      currentTodo: ''
     };
   }
   getItems() {
@@ -19,13 +20,18 @@ class TodoApp extends React.Component {
       </li>;
     });
   }
+  handleInputChange(event) {
+    this.setState({
+      currentTodo: event.target.value
+    });
+  }
   render() {
     return <div className="TodoApp">
       <header className="header">
         <h1>todos</h1>
       </header>
       <section className="main">
-        <input type="text" placeholder="What needs to be done?" className="main-input" />
+        <input type="text" placeholder="What needs to be done?" className="main-input" value={this.state.currentTodo} onChange={this.handleInputChange.bind(this)}/>
         <div className="results">
           <ul>
             {this.getItems()}

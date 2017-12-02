@@ -1,0 +1,18 @@
+.TodoApp {
+  color: red;
+  font-family: 'Times New Roman';
+  font-size: 36px;
+  text-align: center; }
+  .TodoApp .main {
+    font-size: 16px;
+    width: 600px;
+    margin: 0 auto; }
+    .TodoApp .main .main-input {
+      padding: 5px;
+      font-size: 16px;
+      width: 100%; }
+    .TodoApp .main ul {
+      padding: 0; }
+    .TodoApp .main li {
+      list-style: none;
+      text-align: left; }

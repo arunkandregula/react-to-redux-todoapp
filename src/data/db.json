@@ -1,0 +1,21 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "name": "Task 11",
+      "isComplete": true,
+      "isEditable": false
+    },
+    {
+      "id": 3,
+      "name": "Create tasks 3",
+      "isComplete": false,
+      "isEditable": false
+    },
+    {
+      "id": 4,
+      "name": "Setup fetch",
+      "isComplete": true
+    }
+  ]
+}

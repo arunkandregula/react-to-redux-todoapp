@@ -1,0 +1,10 @@
+.TodoItem {
+  list-style: none;
+  text-align: left; }
+  .TodoItem .strike {
+    text-decoration: line-through; }
+  .TodoItem .delete-icon {
+    visibility: hidden;
+    color: red; }
+  .TodoItem:hover .delete-icon {
+    visibility: visible; }

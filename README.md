@@ -2,7 +2,7 @@
    1. To help newbies to transition from React to React with Redux.
 
 ## Branch. 
-01-step1-moving-state-to-store
+01-moving-state-to-store
 
 ## Step1. Move the state from TodoApp component to Store.
    1. We need to create new entities like Store, Reducers, ActionsCreator, Constants.

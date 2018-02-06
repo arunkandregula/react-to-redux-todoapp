@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function getCurrentPath(){
   /* eslint-disable no-restricted-globals */
-  debugger;
   let path = document.location.pathname;
   path = path.substring(path.lastIndexOf('/'));
   return path;

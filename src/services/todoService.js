@@ -1,3 +1,5 @@
+// We need to run: json-server -p 8080 src/data/db.json
+
 const baseURL = 'http://localhost:8080/todos';
 
 export default {

@@ -7,19 +7,18 @@ import { findById, toggleTodo,
 import TodoService from '../../../services/todoService';
 import Footer from '../../Router/Footer';
 import PropTypes from 'prop-types';
-import StoreFactory from '../../../store/StoreFactory';
-import ActionsCreator from '../../../actions/ActionsCreator'
 
-const _store = StoreFactory.getStore();
+import ActionsCreator from '../../../actions/ActionsCreator'
 
 class TodoApp extends React.Component {
   static contextTypes = {
-    route: PropTypes.string
+    route: PropTypes.string,
+    store: PropTypes.object
   }
 
   getItems() {
     console.log(this.context.route);
-    const filteredTodos =  filterTodos(_store.getState().todos, this.context.route);
+    const filteredTodos =  filterTodos(this.context.store.getState().todos, this.context.route);
 
     return filteredTodos.map((eachTodo) => {
       return <TodoItem 
@@ -31,19 +30,19 @@ class TodoApp extends React.Component {
   }
 
   handleToggle = (id) => { 
-    _store.dispatch(ActionsCreator.getToggleTodoAction(id));
+    this.context.store.dispatch(ActionsCreator.getToggleTodoAction(id));
   }
 
   handleInputChange = (event) => {
-    _store.dispatch(ActionsCreator.getChangeCurrentTodoAction(event.target.value));
+    this.context.store.dispatch(ActionsCreator.getChangeCurrentTodoAction(event.target.value));
   }
 
   componentDidMount(){
     TodoService.loadTodos().then((data)=>{
-      _store.dispatch(ActionsCreator.getLoadTodosAction(data));
+      this.context.store.dispatch(ActionsCreator.getLoadTodosAction(data));
     });
 
-    this.unsubscribe = _store.subscribe(()=>{
+    this.unsubscribe = this.context.store.subscribe(()=>{
       this.forceUpdate();
     });
   }
@@ -53,27 +52,27 @@ class TodoApp extends React.Component {
 
   handleInputSubmit = (event) => {
     event.preventDefault();
-    _store.dispatch(ActionsCreator.getAddTodoAction(_store.getState().currentTodo));
+    this.context.store.dispatch(ActionsCreator.getAddTodoAction(this.context.store.getState().currentTodo));
   }
 
   handleInvalidInputSubmit = (event) => {
     event.preventDefault();
-    _store.dispatch(ActionsCreator.getShowErrorMsgAction(
+    this.context.store.dispatch(ActionsCreator.getShowErrorMsgAction(
       'Please supply a valid Todo text'
     ));
   }
 
   render() {
 
-    const submitHandler = _store.getState().currentTodo ? this.handleInputSubmit : this.handleInvalidInputSubmit;
+    const submitHandler = this.context.store.getState().currentTodo ? this.handleInputSubmit : this.handleInvalidInputSubmit;
 
     return <div className="TodoApp">
       <header className="header">
         <h1>todos</h1>
       </header>
       <section className="main">
-        {_store.getState().errorMessage && <span className='error'>{_store.getState().errorMessage}</span>}
-        <TodoInput currentTodo={_store.getState().currentTodo} handleInputChange={this.handleInputChange} handleInputSubmit={submitHandler}/>
+        {this.context.store.getState().errorMessage && <span className='error'>{this.context.store.getState().errorMessage}</span>}
+        <TodoInput currentTodo={this.context.store.getState().currentTodo} handleInputChange={this.handleInputChange} handleInputSubmit={submitHandler}/>
         <TodoList items={this.getItems()} />
       </section>
       <footer>

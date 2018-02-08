@@ -22,7 +22,6 @@
       Similarity: both of them are providing some info via context.
       Difference: If that info ( route for Router and store for Provider ) chnages,    
                   Router rerenders the entire app, where as, Provider leaves it to individual components if they want to rerender.
-   3.                
 
    
 ## Problems with this Step 2. 

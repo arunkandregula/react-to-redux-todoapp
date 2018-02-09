@@ -1,5 +1,5 @@
 import Constants from '../constants/Constants';
-import { generateId, addTodo, findById, toggleTodo } from '../lib/todoHelpers';
+import { generateId, addTodo, findById, toggleTodo, filterTodos } from '../lib/todoHelpers';
 import TodoService from '../services/todoService';
 
 const todosReducer = (prevState=[], action)=>{
@@ -38,3 +38,7 @@ const todosReducer = (prevState=[], action)=>{
 }
 
 export default todosReducer;  
+
+export const getFilteredTodos = (state, filter) => {
+  return filterTodos(state, filter);
+}

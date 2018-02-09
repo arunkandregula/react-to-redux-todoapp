@@ -2,27 +2,27 @@
    1. To help newbies to transition from React to React with Redux.
 
 ## Current Step: 
-  Step4.
+  Step5.
 
-## Current Branch: 04-enter-react-router
-  Go to Step4 for related ReadMe for this branch.
+## Current Branch: 05-injecting-router-params
+  Go to Step5 for related ReadMe for this branch.
 
 ## Problems with Step 4.
-1. We are using our own versions of Router and Link, which are very common in almost all applications.
-   So lets replace them with versions provided by react-router.
+1. Currently Router params are available only to TodoApp. TodoApp doesnt directly use them, rahter pass them to its child components like :
+<TodoListContainer filter={props.params.filter || 'all'}/>
+Again boiler plate props. Lets see how we can directly inject these router params into connected components or container components.
 
 
-## Step4 - Branch. 
-04-enter-react-router
+## Step5 - Branch. 
+05-injecting-router-params
 
 
-## Step4. 
- 1. Instead of relying on custom Router's context.route, we rely on react-router's context params.
- 2. Setting the default value of params.filter is a must or the default filter will be shown as undefined.
-  Example: 
-  <TodoListContainer filter={props.params.filter || 'all'}/>
-
- 3. Also <Link> tag has activeClass which makes life easy withotu using classNames etc.
+## Step5. 
+ 1. In what ever container component, we need router params, do:
+    import { withRouter } from 'react-router';
+    ..
+    return withRouter(connect(.. , ..)(...));
+ 2. Thats it.   
 
 
 

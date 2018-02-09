@@ -13,7 +13,7 @@ const TodoApp = (props, context) => {
     <section className="main">
       <ErrorMessageContainer />
       <TodoInputContainer />
-      <TodoListContainer filter={props.params.filter || 'all'}/>
+      <TodoListContainer />
     </section>
     <footer>
       <Footer filter={props.params.filter || 'all'}/>

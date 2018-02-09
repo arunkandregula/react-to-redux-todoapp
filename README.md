@@ -19,6 +19,9 @@
 ## Step4. 
  1. Instead of relying on custom Router's context.route, we rely on react-router's context params.
  2. Setting the default value of params.filter is a must or the default filter will be shown as undefined.
+  Example: 
+  <TodoListContainer filter={props.params.filter || 'all'}/>
+
  3. Also <Link> tag has activeClass which makes life easy withotu using classNames etc.
 
 

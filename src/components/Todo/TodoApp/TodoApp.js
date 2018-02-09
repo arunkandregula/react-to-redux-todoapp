@@ -2,7 +2,7 @@ import React from 'react';
 import './TodoApp.css';
 import { TodoInputContainer, TodoListContainer, ErrorMessageContainer } from '..';
 import TodoService from '../../../services/todoService';
-import Footer from '../../Router/Footer';
+import Footer from '../../Footer/Footer';
 import PropTypes from 'prop-types';
 
 const TodoApp = (props, context) => {
@@ -13,10 +13,10 @@ const TodoApp = (props, context) => {
     <section className="main">
       <ErrorMessageContainer />
       <TodoInputContainer />
-      <TodoListContainer route={context.route}/>
+      <TodoListContainer filter={props.params.filter || 'all'}/>
     </section>
     <footer>
-      <Footer />
+      <Footer filter={props.params.filter || 'all'}/>
     </footer>
   </div>;
 };

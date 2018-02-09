@@ -3,3 +3,5 @@
   .Footer a {
     margin-left: 2px;
     margin-right: 2px; }
+    .Footer a.active {
+      font-weight: bold; }

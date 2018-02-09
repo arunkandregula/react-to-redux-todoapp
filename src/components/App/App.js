@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TodoApp from '../Todo/TodoApp/TodoApp';
-import Router from '../Router/Router';
 import {Provider} from 'react-redux';
-
+import {Router, Route, browserHistory} from 'react-router';
 import StoreFactory from '../../store/StoreFactory';
 
 class App extends Component {
@@ -12,8 +11,8 @@ class App extends Component {
     return (
       <div className="App">
         <Provider store={StoreFactory.getStore()}>
-          <Router>
-            <TodoApp />
+          <Router history={browserHistory}>
+            <Route path="/(:filter)" component={TodoApp} />
           </Router> 
         </Provider>
       </div>

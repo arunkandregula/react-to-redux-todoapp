@@ -38,10 +38,10 @@ export const deleteTodo = (list, id)=>{
   ];
 }
 
-export const filterTodos = (todos, route)=>{
-  switch(route){
-    case '/': return todos;
-    case '/active': return todos.filter((eachTodo)=>{ return !eachTodo.isComplete });
-    case '/complete': return todos.filter((eachTodo)=>{ return eachTodo.isComplete });
+export const filterTodos = (todos, filter)=>{
+  switch(filter){
+    case 'all': return todos;
+    case 'active': return todos.filter((eachTodo)=>{ return !eachTodo.isComplete });
+    case 'complete': return todos.filter((eachTodo)=>{ return eachTodo.isComplete });
   }
 }

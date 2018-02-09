@@ -2,7 +2,6 @@ import React from 'react';
 import './TodoInput.css';
 
 class TodoInput extends React.Component{
-  
   onSubmit = (event)=>{
      event.preventDefault();
      this.props.handleInputSubmit(this.refs.inputNode.value);

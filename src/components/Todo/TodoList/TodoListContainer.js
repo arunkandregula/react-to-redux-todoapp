@@ -4,7 +4,7 @@ import {filterTodos} from '../../../lib/todoHelpers';
 import ActionsCreator from '../../../actions/ActionsCreator';
 
 const getFilteredItems = (state, ownProps) => {
-  return filterTodos(state.todos, ownProps.route);
+  return filterTodos(state.todos, ownProps.filter);
 }
 
 const mapStateToProps = (state, ownProps)=>({

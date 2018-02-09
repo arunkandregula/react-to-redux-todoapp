@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import TodoApp from '../Todo/TodoApp/TodoApp';
 import Router from '../Router/Router';
-import Provider from '../Provider/Provider';
+import {Provider} from 'react-redux';
 
 import StoreFactory from '../../store/StoreFactory';
 

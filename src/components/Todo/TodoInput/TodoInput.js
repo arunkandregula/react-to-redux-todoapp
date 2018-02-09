@@ -1,10 +1,24 @@
 import React from 'react';
 import './TodoInput.css';
 
-const TodoInput = (props) => {
-  return <form onSubmit={props.handleInputSubmit}>
-    <input type="text" placeholder="What needs to be done?" className="TodoInput" value={props.currentTodo} onChange={props.handleInputChange} />
-  </form>;  
+class TodoInput extends React.Component{
+  
+  onSubmit = (event)=>{
+     event.preventDefault();
+     this.props.handleInputSubmit(this.refs.inputNode.value);
+  }
+  render(){
+    return <form onSubmit={this.onSubmit}>
+      <input 
+        type="text" 
+        ref="inputNode"
+        placeholder="What needs to be done?" 
+        className="TodoInput" 
+        value={this.props.currentTodo} 
+        onChange={this.props.handleInputChange} 
+      />
+    </form>;  
+  }
 }
 
 export default TodoInput;

@@ -4,6 +4,7 @@ import errorMessageReducer from './errorMessageReducer';
 
 const defaultState = {
   todos: [],
+  currentTodo: '',
   errorMessage: null
 };
 

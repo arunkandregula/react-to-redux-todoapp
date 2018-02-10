@@ -2,23 +2,20 @@
    1. To help newbies to transition from React to React with Redux.
 
 ## Current Step: 
-  Step7.
+  Step8.
 
-## Current Branch: 07-nomalizing-state-shape
-  Go to Step6 for related ReadMe for this branch.
-
-## Problems with Step 6.
-1. In real world, the state could be more complex like multiple arrays.
-   In this case, if same todo end up in more than one array, that could lead to data inconsistencies.
+## Current Branch: 08-log-every-state-change
+  Go to Step8 for related ReadMe for this branch.
 
 
-## Step7 - Branch. 
-07-treat-state-as-database
+## Step8 - Branch. 
+08-log-every-state-change
 
+## Step8. 
+ 1. We will see how to log every state change in the redux app. In Redux app, although we dont have central Dispatcher like in Flux, every state chnage is centralized thru store.dispatch() method.
 
-## Step7. 
- 1. Lets normalize the state and make it look like a database for consistency purposes.
- 2. Lets use v4() method of node-uuid npm package to generateId.
- 3. We also added support for LOAD_TODOS event.
+ 2. In this step, we will see how we can override store.dispatch method to log every state change.
+    We will also see how to use console.group API for grouping and coloring the logs.
 
+ 3. In one of the subsequent steps, we will see how to achieve the same using a npm package. (redux-logger)
 

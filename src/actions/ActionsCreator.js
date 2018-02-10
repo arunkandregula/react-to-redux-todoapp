@@ -1,10 +1,14 @@
 import Constants from '../constants/Constants';
+import { v4 } from 'node-uuid';
 
 const ActionsCreator = {
   getAddTodoAction(text){
     return {
       type: Constants.ADD_TODO,
-      data: text
+      data: {
+        id: v4(),
+        text
+      }
     };
   },
   getLoadTodosAction(todos){
@@ -28,7 +32,9 @@ const ActionsCreator = {
   getToggleTodoAction(id){
     return {
       type: Constants.TOGGLE_TODO,
-      data: id
+      data: {
+        id
+      }
     };
 
   }

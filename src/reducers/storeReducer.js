@@ -3,7 +3,10 @@ import currentTodoReducer from './currentTodoReducer';
 import errorMessageReducer from './errorMessageReducer';
 
 const defaultState = {
-  todos: [],
+  todos: {
+    byIds: {},
+    allIds: []
+  },
   currentTodo: '',
   errorMessage: null
 };

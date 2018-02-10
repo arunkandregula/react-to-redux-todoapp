@@ -2,10 +2,6 @@ export const addTodo = (list, newTodo)=>{
   return [...list, newTodo];
 }
 
-export const generateId = ()=>{
-  return Math.random()*10000 << 0;
-}
-
 export const findById = (list, id)=>{
   return list.find((eachItem)=>{
     return eachItem.id === id;

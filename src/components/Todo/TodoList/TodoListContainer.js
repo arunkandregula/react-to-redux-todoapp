@@ -1,9 +1,10 @@
+import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router';
 import TodoList from './TodoList';
-import {filterTodos} from '../../../lib/todoHelpers';
 import ActionsCreator from '../../../actions/ActionsCreator';
 import * as fromStoreState from '../../../reducers/storeReducer';
+import TodoService from '../../../services/todoService';
 
 const mapStateToProps = (state, ownProps)=>({
   items: fromStoreState.getFilteredTodos(state, ownProps.params.filter || 'all')
@@ -22,6 +23,19 @@ const mapDispatchToProps = (dispatch)=>({
 
 //Using mapDispatchToProps shorthand notation.
 const mapDispatchToProps = {
-  handleToggle: ActionsCreator.getToggleTodoAction
+  handleToggle: ActionsCreator.getToggleTodoAction,
+  loadData: ActionsCreator.getLoadTodosAction
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoList));
+
+
+class TodoListWrapper extends React.Component{
+  componentDidMount(){
+    TodoService.loadTodos().then((jsonResponse)=>{
+      this.props.loadData(jsonResponse);
+    });
+  }
+  render(){
+    return <TodoList {...this.props} />;
+  }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoListWrapper));

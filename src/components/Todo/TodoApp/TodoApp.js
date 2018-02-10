@@ -1,7 +1,6 @@
 import React from 'react';
 import './TodoApp.css';
 import { TodoInputContainer, TodoListContainer, ErrorMessageContainer } from '..';
-import TodoService from '../../../services/todoService';
 import Footer from '../../Footer/Footer';
 import PropTypes from 'prop-types';
 

@@ -11,10 +11,13 @@ const ActionsCreator = {
       }
     };
   },
-  getLoadTodosAction(todos){
+  getLoadTodosAction(todos, filter){
     return {
       type: Constants.LOAD_TODOS,
-      data: todos
+      data: {
+        todos,
+        filter
+      }
     };
   },
   getChangeCurrentTodoAction(currentTodo){

@@ -5,9 +5,12 @@ const allIdsReducer = (prevState = [], action)=>{
     case Constants.ADD_TODO:
       return [...prevState, action.data.id];
     case Constants.LOAD_TODOS:
-      return action.data.map((eachTodo)=>{
-        return eachTodo.id;
-      });
+      return {
+        ...prevState,
+        [action.data.filter]: action.data.todos.map((eachTodo)=>{
+          return eachTodo.id;
+        })
+      };
   }
   return prevState;
 }

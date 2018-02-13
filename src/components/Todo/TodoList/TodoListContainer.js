@@ -6,9 +6,16 @@ import ActionsCreator from '../../../actions/ActionsCreator';
 import * as fromStoreState from '../../../reducers/storeReducer';
 import TodoService from '../../../services/todoService';
 
-const mapStateToProps = (state, ownProps)=>({
-  items: fromStoreState.getFilteredTodos(state, ownProps.params.filter || 'all')
-});
+const mapStateToProps = (state, ownProps)=>{
+  const filter = ownProps.params.filter || 'all';
+
+  return {
+    items: fromStoreState.getFilteredTodos(state, filter),
+    filter
+  };
+}
+  
+
 
 /*
 
@@ -30,10 +37,21 @@ const mapDispatchToProps = {
 
 class TodoListWrapper extends React.Component{
   componentDidMount(){
-    TodoService.loadTodos().then((jsonResponse)=>{
-      this.props.loadData(jsonResponse);
+    this.fetchData(this.props.filter);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.filter !== this.props.filter){
+      this.fetchData(nextProps.filter);
+    }
+  }
+
+  fetchData(filter){
+    TodoService.loadTodos(filter).then((jsonResponse)=>{
+      this.props.loadData(jsonResponse, this.props.filter);
     });
   }
+
   render(){
     return <TodoList {...this.props} />;
   }

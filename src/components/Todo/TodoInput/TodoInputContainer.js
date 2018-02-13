@@ -8,11 +8,9 @@ const mapStateToProps = (state)=>({
 
 const mapDispatchToProps = (dispatch)=>({
   handleInputChange: (event)=>{
-    debugger;
     dispatch(ActionsCreator.getChangeCurrentTodoAction(event.target.value));
   },
   handleInputSubmit: (currentTodo)=>{
-    debugger;
     // Million dollar question: How to access state in mapDispatchToProps ?
     // We cant ideally.
     // So 1 way to solve this is to get the value of currentTodo from input ref

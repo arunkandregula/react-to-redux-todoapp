@@ -2,7 +2,6 @@ import Constants from '../constants/Constants';
 import todoReducer from './todoReducer';
 
 const byIdsReducer = (prevState = {}, action)=>{
-  debugger;
   switch(action.type){
     case Constants.ADD_TODO:
     case Constants.TOGGLE_TODO:
@@ -12,7 +11,7 @@ const byIdsReducer = (prevState = {}, action)=>{
       };
     case Constants.LOAD_TODOS:
       let map = {};
-      map = action.data.reduce((accumulator, currentValue)=>{
+      map = action.data.todos.reduce((accumulator, currentValue)=>{
         accumulator[currentValue.id] = currentValue;
         return accumulator;
       }, map);

@@ -11,8 +11,10 @@ const todosReducer = combineReducers({
 export default todosReducer;  
 
 export const getFilteredTodos = (state, filter) => {
-  const allTodos = state.allIds.map((eachId)=>{
-    debugger;
+  if(!state.allIds[filter]){
+    return [];
+  }
+  const allTodos = state.allIds[filter].map((eachId)=>{
     return state.byIds[eachId];
   });
 

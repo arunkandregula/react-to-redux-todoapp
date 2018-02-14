@@ -14,7 +14,7 @@ const byIdsReducer = (prevState = {}, action)=>{
       map = action.data.todos.reduce((accumulator, currentValue)=>{
         accumulator[currentValue.id] = currentValue;
         return accumulator;
-      }, map);
+      }, prevState);
       return map;
   }
   return prevState;

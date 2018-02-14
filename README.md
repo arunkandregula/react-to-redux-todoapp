@@ -26,7 +26,7 @@ npm start
     <TodoList filter="active" items={filtered items} />
 
     Previous behaviour: All the data is loaded first time. Every time we chnage filter, items are filtered from the loaded list.
-    New/This Step behaviour: Every time we chnage filter, we fire an ajax request to get data specific to the filter.
+    New/This Step behaviour: Every time we change filter, we fire an ajax request to get data specific to the filter.
 
 
 

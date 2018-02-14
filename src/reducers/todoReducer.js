@@ -17,10 +17,14 @@ const todoReducer = (prevState = {}, action)=>{
     
 
     case Constants.TOGGLE_TODO:
-      return {
+      const toggledTodo = {
         ...prevState,
         isComplete: !prevState.isComplete
       };
+      TodoService.saveTodo(toggledTodo).then(()=>{
+        console.log('Todo toggled');
+      });
+      return toggledTodo;
   }
   return prevState;
 }

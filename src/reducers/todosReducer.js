@@ -14,9 +14,9 @@ export const getFilteredTodos = (state, filter) => {
   if(!state.allIds[filter]){
     return [];
   }
-  const allTodos = state.allIds[filter].map((eachId)=>{
+  const filteredTodos = state.allIds[filter].map((eachId)=>{
     return state.byIds[eachId];
   });
 
-  return filterTodos(allTodos, filter);
+  return filteredTodos;
 }

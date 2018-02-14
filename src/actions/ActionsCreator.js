@@ -39,8 +39,16 @@ const ActionsCreator = {
         id
       }
     };
-
+  },
+  getDeleteTodoAction(id){
+    return {
+      type: Constants.DELETE_TODO,
+      data: {
+        id
+      }
+    };
   }
+
 };
 
 export default ActionsCreator;

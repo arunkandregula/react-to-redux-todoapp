@@ -16,6 +16,11 @@ const byIdsReducer = (prevState = {}, action)=>{
         return accumulator;
       }, prevState);
       return map;
+    case Constants.DELETE_TODO:
+      let newState = Object.assign({}, prevState);
+      delete newState[action.data.id];
+      return newState;
+  
   }
   return prevState;
 }

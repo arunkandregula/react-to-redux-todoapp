@@ -49,6 +49,18 @@ const allIdsReducer = (prevState = [], action)=>{
           return eachTodo.id;
         })
       };
+    case Constants.DELETE_TODO:  
+      const keys = Object.keys(prevState);
+      const newState = {};
+      keys.forEach((eachKey)=>{
+        const indexOfTodo = prevState[eachKey].indexOf(action.data.id);
+        newState[eachKey] = [
+          ...prevState[eachKey].slice(0, indexOfTodo),
+          ...prevState[eachKey].slice(indexOfTodo + 1)        
+        ];
+      });
+
+      return newState;
   }
   return prevState;
 }

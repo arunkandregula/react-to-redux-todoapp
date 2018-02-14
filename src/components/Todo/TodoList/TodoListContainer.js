@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch)=>({
 //Using mapDispatchToProps shorthand notation.
 const mapDispatchToProps = {
   handleToggle: ActionsCreator.getToggleTodoAction,
+  handleDelete: ActionsCreator.getDeleteTodoAction,
   loadData: ActionsCreator.getLoadTodosAction
 };
 

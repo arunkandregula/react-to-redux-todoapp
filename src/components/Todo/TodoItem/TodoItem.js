@@ -2,6 +2,10 @@ import React from 'react';
 import './TodoItem.css';
 import classNames from 'classnames';
 
+const handleDelete = (props, event)=>{
+  event.preventDefault();
+  props.handleDelete(props.todo.id);
+}
 const TodoItem = (props) => {
 
   const todoItemClass = classNames({
@@ -9,9 +13,8 @@ const TodoItem = (props) => {
   });
   let content = <span className={todoItemClass}>{props.todo.name}</span>;
   
-
   return <li className="TodoItem">
-    <input type="checkbox" checked={props.todo.isComplete} onChange={props.handleToggle.bind(null, props.todo.id )} />
+      <a href="#" onClick={handleDelete.bind(null, props )}>X</a><input type="checkbox" checked={props.todo.isComplete} onChange={props.handleToggle.bind(null, props.todo.id )} />
     {content}
   </li>;
 }

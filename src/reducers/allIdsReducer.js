@@ -13,7 +13,7 @@ const allIdsReducer = (prevState = [], action)=>{
       let newActiveList = prevState.active;
       let newCompleteList = prevState.complete;
 
-      if(prevState.active.includes(action.data.id)) {
+      if(prevState.active && prevState.active.includes(action.data.id)) {
         let index = prevState.active.indexOf(action.data.id);
         newActiveList = [
           ...prevState.active.slice(0, index),
@@ -43,13 +43,33 @@ const allIdsReducer = (prevState = [], action)=>{
       };
       
     case Constants.LOAD_TODOS:
-      return {
-        ...prevState,
-        [action.data.filter]: action.data.todos.map((eachTodo)=>{
-          return eachTodo.id;
-        })
-      };
-    case Constants.DELETE_TODO:  
+      if(action.data.filter == 'active' || action.data.filter == 'complete' ){
+        return {
+          ...prevState,
+          [action.data.filter]: action.data.todos.map((eachTodo)=>{
+            return eachTodo.id;
+          })
+        };
+      } else {
+        const map = {
+          all: [],
+          active: [],
+          complete: []
+        };
+        action.data.todos.forEach((eachTodo, i)=>{
+          map['all'].push(eachTodo.id); 
+          switch(eachTodo.isComplete){
+            case true:
+              map['complete'].push(eachTodo.id); 
+              break;
+            case false:
+              map['active'].push(eachTodo.id); 
+              break;
+          }
+        });  
+        return map;
+      }
+      case Constants.DELETE_TODO:  
       const keys = Object.keys(prevState);
       const newState = {};
       keys.forEach((eachKey)=>{

@@ -32,7 +32,8 @@ const mapDispatchToProps = (dispatch)=>({
 const mapDispatchToProps = {
   handleToggle: ActionsCreator.getToggleTodoAction,
   handleDelete: ActionsCreator.getDeleteTodoAction,
-  loadData: ActionsCreator.getLoadTodosAction
+  //loadData: ActionsCreator.getLoadTodosAction
+  loadData: ActionsCreator.getLoadTodosPromiseAction
 };
 
 
@@ -48,9 +49,15 @@ class TodoListWrapper extends React.Component{
   }
 
   fetchData(filter){
+    /*
+    Approach 1.
     TodoService.loadTodos(filter).then((jsonResponse)=>{
       this.props.loadData(jsonResponse, this.props.filter);
     });
+    */
+    // Approach 2.
+    this.props.loadData(this.props.filter);
+    
   }
 
   render(){

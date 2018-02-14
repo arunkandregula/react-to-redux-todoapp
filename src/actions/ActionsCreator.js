@@ -1,5 +1,6 @@
 import Constants from '../constants/Constants';
 import { v4 } from 'node-uuid';
+import TodoService from '../services/todoService';
 
 const ActionsCreator = {
   getAddTodoAction(text){
@@ -47,6 +48,12 @@ const ActionsCreator = {
         id
       }
     };
+  },
+
+  getLoadTodosPromiseAction(filter){
+    return TodoService.loadTodos(filter).then((data)=>{
+      return ActionsCreator.getLoadTodosAction(data, filter);
+    });
   }
 
 };

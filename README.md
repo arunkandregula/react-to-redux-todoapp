@@ -9,19 +9,18 @@ npm start
 
 
 ## Current Step: 
-  Step12.
+  Step13.
 
-## Current Branch: 12-matching-signatures-for-middleware
-  Go to Step11 for related ReadMe for this branch.
+## Current Branch: 13-redux-applyMiddleware
+  Go to Step13 for related ReadMe for this branch.
 
-## Problems with Step 11
-1. The signature of the middleware functions are different from the signature of middleware modules provided by redux i.e. 'redux-logger' and 'redux-promise'.
+## Problems with Step 12
+1. The middlewares we wrote like getDispatchThatLogsState, getDispatchThatRecognizePromise and wrapDispatchWithMiddleware function are not reusable across applications.
    
 
-## Step12 - Branch. 
-12-matching-signatures-for-middleware
+## Step13 - Branch. 
+13-redux-applyMiddleware
 
-## Step12. 
-  1. In a middleware chain, multiple middlewares may play their role. Each middleware instead of taking a store as input and return enhanced dispatch. 
-     It wants to take previous dispatch as input and return next dispatch as output. 
-     For that we need to refactor each middleware function.
+## Step13. 
+1. We can reuse {applyMiddleware} from 'redux', {createLogger} from 'redux-logger', promise from 'redux-promise' instead of creating them by our own.
+

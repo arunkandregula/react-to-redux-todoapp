@@ -1,33 +1,28 @@
 import {createStore} from 'redux';
 import storeReducer from '../reducers/storeReducer';
 
-const getDispatchThatLogsState = (store) =>{
-  const originalDispatch = store.dispatch;
-
+const getDispatchThatLogsState = (store) => (dispatch) => {
   if(!console.group){
-    return originalDispatch;
+    return dispatch;
   }
   return (action)=>{
     console.group(action.type);
     console.log('%c prev State', 'color: gray',store.getState());
     console.log('%c action', 'color: blue', action);
-    const returnValue = originalDispatch(action);
+    const returnValue = dispatch(action);
     console.log('%c next State:', 'color: green', store.getState());
     console.groupEnd(action.type);
     return returnValue;
   };
 }
 
-const getDispatchThatRecognizePromise = (store)=>{
-  const originalDispatch = store.dispatch;
-  return (action)=>{
-    if(typeof action.then === 'function'){
-      action.then((data)=>{
-        originalDispatch(data);
-      });
-    } else{
-       originalDispatch(action);
-    }
+const getDispatchThatRecognizePromise = (store)=>(dispatch)=>(action)=>{
+  if(typeof action.then === 'function'){
+    action.then((data)=>{
+      dispatch(data);
+    });
+  } else{
+     dispatch(action);
   }
 }
 
@@ -35,7 +30,7 @@ const getDispatchThatRecognizePromise = (store)=>{
 const wrapDispatchWithMiddleWare = (store, middlewares)=>{
   // clone it before reversing
   middlewares.slice().reverse().forEach((eachMiddleWare)=>{
-    store.dispatch = eachMiddleWare(store);
+    store.dispatch = eachMiddleWare(store)(store.dispatch);
   });
 }
 

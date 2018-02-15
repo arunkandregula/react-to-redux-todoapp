@@ -31,14 +31,24 @@ const getDispatchThatRecognizePromise = (store)=>{
   }
 }
 
+
+const wrapDispatchWithMiddleWare = (store, middlewares)=>{
+  // clone it before reversing
+  middlewares.slice().reverse().forEach((eachMiddleWare)=>{
+    store.dispatch = eachMiddleWare(store);
+  });
+}
+
 const configureStore = ()=>{
   const store = createStore(storeReducer);
+
+  const middlewares = [getDispatchThatRecognizePromise];
   
   if(process.env.NODE_ENV !== 'production'){
-    store.dispatch = getDispatchThatLogsState(store);
+    middlewares.push(getDispatchThatLogsState);
   }
   
-  store.dispatch = getDispatchThatRecognizePromise(store);
+  wrapDispatchWithMiddleWare(store, middlewares);
   
   return store;
 };

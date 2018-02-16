@@ -19,27 +19,26 @@ const getDispatchThatLogsState = (store) =>{
 }
 
 const getDispatchThatRecognizePromise = (store)=>{
-  const originalDispatch = store.dispatch;
+  const nextDispatch = store.dispatch;
   return (action)=>{
-    if(typeof action.then === 'function'){
-      action.then((data)=>{
-        originalDispatch(data);
+    if (typeof action.then === 'function') {
+      return action.then((data) => {
+        nextDispatch(data);
       });
-    } else{
-       originalDispatch(action);
     }
+    return nextDispatch(action);
   }
 }
 
 const configureStore = ()=>{
   const store = createStore(storeReducer);
-  
+
   if(process.env.NODE_ENV !== 'production'){
     store.dispatch = getDispatchThatLogsState(store);
   }
-  
+
   store.dispatch = getDispatchThatRecognizePromise(store);
-  
+
   return store;
 };
 

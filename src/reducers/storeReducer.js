@@ -25,3 +25,10 @@ export const getFilteredTodos = (state, filter) => {
   return fromTodos.getFilteredTodos(state.todos, filter);
 }
 
+
+export const getIsFetching = (state, filter) => {
+  return fromTodos.getIsFetching(state.todos, filter);
+}
+
+
+

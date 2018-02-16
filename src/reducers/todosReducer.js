@@ -1,14 +1,15 @@
 import {combineReducers} from 'redux';
-import { filterTodos } from '../lib/todoHelpers';
 import byIdsReducer from './byIdsReducer';
 import allIdsReducer from './allIdsReducer';
+import isFetchingByFilterReducer, * as fromIsFetchingByFilter from './isFetchingByFilterReducer';
 
 const todosReducer = combineReducers({
   byIds: byIdsReducer,
-  allIds: allIdsReducer
+  allIds: allIdsReducer,
+  isFetchingByFilter: isFetchingByFilterReducer
 });
 
-export default todosReducer;  
+export default todosReducer;
 
 export const getFilteredTodos = (state, filter) => {
   if(!state.allIds[filter]){
@@ -19,4 +20,8 @@ export const getFilteredTodos = (state, filter) => {
   });
 
   return filteredTodos;
+}
+
+export const getIsFetching = (state, filter) => {
+  return fromIsFetchingByFilter.getIsFetchingForFilter(state.isFetchingByFilter, filter);
 }

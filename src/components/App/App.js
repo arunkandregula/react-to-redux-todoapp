@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TodoApp from '../Todo/TodoApp/TodoApp';
 import {Provider} from 'react-redux';
@@ -13,7 +12,7 @@ class App extends Component {
         <Provider store={StoreFactory.getStore()}>
           <Router history={browserHistory}>
             <Route path="/(:filter)" component={TodoApp} />
-          </Router> 
+          </Router>
         </Provider>
       </div>
     );

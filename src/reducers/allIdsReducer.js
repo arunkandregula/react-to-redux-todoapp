@@ -8,7 +8,7 @@ const allIdsReducer = (prevState = [], action)=>{
         all: [...(prevState.all || []), action.data.id],
         active: [...(prevState.active || []), action.data.id]
       };
-      
+
     case Constants.TOGGLE_TODO:
       let newActiveList = prevState.active;
       let newCompleteList = prevState.complete;
@@ -41,46 +41,31 @@ const allIdsReducer = (prevState = [], action)=>{
         active: newActiveList,
         complete: newCompleteList
       };
-      
-    case Constants.LOAD_TODOS:
-      if(action.data.filter == 'active' || action.data.filter == 'complete' ){
-        return {
-          ...prevState,
-          [action.data.filter]: action.data.todos.map((eachTodo)=>{
-            return eachTodo.id;
-          })
-        };
-      } else {
-        const map = {
-          all: [],
-          active: [],
-          complete: []
-        };
-        action.data.todos.forEach((eachTodo, i)=>{
-          map['all'].push(eachTodo.id); 
-          switch(eachTodo.isComplete){
-            case true:
-              map['complete'].push(eachTodo.id); 
-              break;
-            case false:
-              map['active'].push(eachTodo.id); 
-              break;
-          }
-        });  
-        return map;
-      }
-      case Constants.DELETE_TODO:  
+
+    case Constants.RECEIVE_TODOS:
+      return {
+        ...prevState,
+        [action.data.filter]: action.data.todos.map((eachTodo)=>{
+          return eachTodo.id;
+        })
+      };
+    case Constants.DELETE_TODO:
       const keys = Object.keys(prevState);
       const newState = {};
       keys.forEach((eachKey)=>{
         const indexOfTodo = prevState[eachKey].indexOf(action.data.id);
-        newState[eachKey] = [
-          ...prevState[eachKey].slice(0, indexOfTodo),
-          ...prevState[eachKey].slice(indexOfTodo + 1)        
-        ];
+        if (indexOfTodo !== -1) {
+          newState[eachKey] = [
+            ...prevState[eachKey].slice(0, indexOfTodo),
+            ...prevState[eachKey].slice(indexOfTodo + 1)
+          ];
+        } else {
+          newState[eachKey] = [...prevState[eachKey]];
+        }
       });
-
       return newState;
+    default:
+      break;
   }
   return prevState;
 }

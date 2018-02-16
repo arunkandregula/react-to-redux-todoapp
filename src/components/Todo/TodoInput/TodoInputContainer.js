@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import TodoInput from './TodoInput';
-import ActionsCreator from '../../../actions/ActionsCreator';
+import ActionCreators from '../../../actions/ActionCreators';
 
 const mapStateToProps = (state)=>({
   currentTodo: state.currentTodo
@@ -8,7 +8,7 @@ const mapStateToProps = (state)=>({
 
 const mapDispatchToProps = (dispatch)=>({
   handleInputChange: (event)=>{
-    dispatch(ActionsCreator.getChangeCurrentTodoAction(event.target.value));
+    dispatch(ActionCreators.getChangeCurrentTodoAction(event.target.value));
   },
   handleInputSubmit: (currentTodo)=>{
     // Million dollar question: How to access state in mapDispatchToProps ?
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch)=>({
     // So 1 way to solve this is to get the value of currentTodo from input ref
     // 2nd way to solve is to pass third param as prevState.currentTodo in todosReducer
     if(currentTodo){
-      dispatch(ActionsCreator.getAddTodoAction(currentTodo));
+      dispatch(ActionCreators.getAddTodoThunkAction(currentTodo));
     } else {
-      dispatch(ActionsCreator.getShowErrorMsgAction(
+      dispatch(ActionCreators.getShowErrorMsgAction(
         'Please supply a valid Todo text'
       ));
     }

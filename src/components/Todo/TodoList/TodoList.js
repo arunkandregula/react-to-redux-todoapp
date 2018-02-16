@@ -4,9 +4,9 @@ import './TodoList.css';
 
 const getTodoItemElements = (items, handleToggle, handleDelete)=>{
   return items.map((eachTodo) => {
-    return <TodoItem 
-      key={eachTodo.id} 
-      todo={eachTodo} 
+    return <TodoItem
+      key={eachTodo.id}
+      todo={eachTodo}
       handleToggle={handleToggle}
       handleDelete={handleDelete}
     />;
@@ -14,7 +14,10 @@ const getTodoItemElements = (items, handleToggle, handleDelete)=>{
 }
 
 
-const TodoList = ({items, handleToggle, handleDelete }) => {
+const TodoList = ({ items, isFetching, handleToggle, handleDelete }) => {
+  if (isFetching && !items.length) {
+    return <p>Loading...</p>;
+  }
   return <div className="TodoList">
     <ul>
       {getTodoItemElements(items, handleToggle, handleDelete)}

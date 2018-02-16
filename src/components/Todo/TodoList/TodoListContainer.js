@@ -2,20 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router';
 import TodoList from './TodoList';
-import ActionsCreator from '../../../actions/ActionsCreator';
+import ActionCreators from '../../../actions/ActionCreators';
 import * as fromStoreState from '../../../reducers/storeReducer';
-import TodoService from '../../../services/todoService';
 
 const mapStateToProps = (state, ownProps)=>{
   const filter = ownProps.params.filter || 'all';
-
   return {
     items: fromStoreState.getFilteredTodos(state, filter),
-    filter
+    filter,
+    isFetching: fromStoreState.getIsFetching(state, filter)
   };
 }
-  
-
 
 /*
 
@@ -23,17 +20,19 @@ const mapStateToProps = (state, ownProps)=>{
 
 const mapDispatchToProps = (dispatch)=>({
   handleToggle: (id)=>{
-   dispatch(ActionsCreator.getToggleTodoAction(id)); 
+   dispatch(ActionCreators.getToggleTodoAction(id));
   }
 });;
 */
 
 //Using mapDispatchToProps shorthand notation.
 const mapDispatchToProps = {
-  handleToggle: ActionsCreator.getToggleTodoAction,
-  handleDelete: ActionsCreator.getDeleteTodoAction,
-  //loadData: ActionsCreator.getLoadTodosAction
-  loadData: ActionsCreator.getLoadTodosPromiseAction
+  handleToggle: ActionCreators.getToggleTodoThunkAction,
+  handleDelete: ActionCreators.getDeleteTodoThunkAction,
+  //loadData: ActionCreators.getLoadTodosAction - discussed in one of the previous steps
+  //loadData: ActionCreators.getLoadTodosPromiseAction - discussed in one of the previous steps
+  loadData: ActionCreators.getLoadTodosThunkAction
+
 };
 
 
@@ -42,7 +41,7 @@ class TodoListWrapper extends React.Component{
     this.fetchData(this.props.filter);
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     if(nextProps.filter !== this.props.filter){
       this.fetchData(nextProps.filter);
     }
@@ -56,8 +55,8 @@ class TodoListWrapper extends React.Component{
     });
     */
     // Approach 2.
-    this.props.loadData(this.props.filter);
-    
+    this.props.loadData(filter);
+
   }
 
   render(){

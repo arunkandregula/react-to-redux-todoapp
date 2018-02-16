@@ -1,21 +1,22 @@
 // We need to run: json-server -p 8080 src/data/db.json
 
-let baseURL = 'http://localhost:8080/todos';
+const baseURL = 'http://localhost:8080/todos';
 const allBaseURL = baseURL;
 const activeTodosBaseURL = 'http://localhost:8080/todos?isComplete=false';
 const completeTodosBaseURL = 'http://localhost:8080/todos?isComplete=true';
 
 export default {
-  loadTodos(filter){
+  loadTodos(filter) {
+    let url = allBaseURL;
     switch(filter){
-      case 'all': baseURL = allBaseURL; 
+      case 'all': url = allBaseURL;
                      break;
-      case 'active': baseURL = activeTodosBaseURL; 
+      case 'active': url = activeTodosBaseURL;
                      break;
-      case 'complete': baseURL = completeTodosBaseURL; 
+      case 'complete': url = completeTodosBaseURL;
                      break;
     }
-    return fetch(baseURL).then((todos)=>{
+    return fetch(url).then((todos)=>{
       return todos.json();
     });
   },

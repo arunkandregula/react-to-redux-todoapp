@@ -61,21 +61,33 @@ const ActionCreators = {
 
       // Step1.
       dispatch({
-        type: Constants.REQUEST_TODOS,
+        type: Constants.FETCH_TODOS_REQUEST,
         data: {
           filter
         }
       });
 
-      return TodoService.loadTodos(filter).then((data) => {
-        dispatch({
-          type: Constants.RECEIVE_TODOS,
-          data: {
-            todos: data,
-            filter
-          }
-        });
-      });
+      return TodoService.loadTodos(filter).then(
+        (data) => {
+          dispatch({
+            type: Constants.FETCH_TODOS_SUCCESS,
+            data: {
+              todos: data,
+              filter
+            }
+          });
+        },
+        error => {
+          dispatch({
+            type: Constants.FETCH_TODOS_FAILURE,
+            data: {
+              filter,
+              message: error.message || 'Something went wrong'
+            }
+          });
+        }
+
+      );
     }
   }
 

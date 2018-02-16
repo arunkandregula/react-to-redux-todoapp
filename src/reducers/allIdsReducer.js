@@ -42,7 +42,7 @@ const allIdsReducer = (prevState = [], action)=>{
         complete: newCompleteList
       };
 
-    case Constants.RECEIVE_TODOS:
+    case Constants.FETCH_TODOS_SUCCESS:
       return {
         ...prevState,
         [action.data.filter]: action.data.todos.map((eachTodo)=>{

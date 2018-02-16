@@ -1,20 +1,17 @@
 import todosReducer, * as fromTodos from './todosReducer';
 import currentTodoReducer from './currentTodoReducer';
-import errorMessageReducer from './errorMessageReducer';
 
 const defaultState = {
   todos: {
     byIds: {},
     allIds: []
   },
-  currentTodo: '',
-  errorMessage: null
+  currentTodo: ''
 };
 
 const storeReducer = (state=defaultState, action)=>({
   todos: todosReducer(state.todos, action),
-  currentTodo: currentTodoReducer(state.currentTodo, action),
-  errorMessage: errorMessageReducer(state.errorMessage, action)
+  currentTodo: currentTodoReducer(state.currentTodo, action)
 });
 
 
@@ -28,6 +25,10 @@ export const getFilteredTodos = (state, filter) => {
 
 export const getIsFetching = (state, filter) => {
   return fromTodos.getIsFetching(state.todos, filter);
+}
+
+export const getErrorMessageForFilter = (state, filter) => {
+  return fromTodos.getErrorMessageForFilter(state.todos, filter);
 }
 
 

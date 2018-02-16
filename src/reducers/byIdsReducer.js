@@ -9,7 +9,7 @@ const byIdsReducer = (prevState = {}, action)=>{
         ...prevState,
         [action.data.id]: todoReducer(prevState[action.data.id], action)
       };
-    case Constants.RECEIVE_TODOS:
+    case Constants.FETCH_TODOS_SUCCESS:
       let map = {};
       map = action.data.todos.reduce((accumulator, currentValue)=>{
         accumulator[currentValue.id] = currentValue;

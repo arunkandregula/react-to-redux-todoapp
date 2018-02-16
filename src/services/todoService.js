@@ -30,6 +30,10 @@ export default {
     return this.delay(5000)
       .then(() => fetch(url))
       .then((res) => {
+        // lets throw error randomly to test the FETCH_TODOS_FAILURE case
+        if(Math.random() > 0.5){
+          throw new Error('Boom !');
+        }
         return res.json();
       });
 

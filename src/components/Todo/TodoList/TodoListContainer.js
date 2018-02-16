@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps)=>{
   return {
     items: fromStoreState.getFilteredTodos(state, filter),
     filter,
-    isFetching: fromStoreState.getIsFetching(state, filter)
+    isFetching: fromStoreState.getIsFetching(state, filter),
+    errorMessage: fromStoreState.getErrorMessageForFilter(state, filter)
   };
 }
 
@@ -58,9 +59,18 @@ class TodoListWrapper extends React.Component{
     this.props.loadData(filter).then(() => console.log('loadData is done. Async'));
 
   }
+  showErrorMessageIfNeeded() {
+    if (this.props.errorMessage) {
+      return <p>{this.props.errorMessage}. <button onClick={this.fetchData.bind(this, this.props.filter)}> Try again </button></p>;
+    }
+    return null;
+  }
 
   render(){
-    return <TodoList {...this.props} />;
+    return <div>
+      {this.showErrorMessageIfNeeded()}
+      <TodoList {...this.props} />
+    </div>;
   }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoListWrapper));

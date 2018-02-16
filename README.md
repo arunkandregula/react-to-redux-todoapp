@@ -9,27 +9,20 @@ npm start
 
 
 ## Current Step:
-  Step15.
+  Step16.
 
-## Current Branch: 15-avoiding-race-conditions-with-thunks
-  Go to Step15 for related ReadMe for this branch.
+## Current Branch: 16-handling-error-messages
+  Go to Step16 for related ReadMe for this branch.
 
-## Problems with Step 14
-1. When we click each of following links when others are still loading : "all", "active", "completed",
-   we keep dispatching LoadTodosThunkAction. So we get series of REQUEST_TODOS, followed by series of RECIEVE_TODOS potentially resulting in a race condition.
+## Problems with Step 15 and its predecessors.
+1. When API throws errors, we are not handling it graciously.
 
-2. Reducers like TodoReducer is calling Server API. Reducers are supposed to be pure functions and should not have any side effects.
-   So we should not call server API in reducers. Lets see where we can call Server API.
+## Step16 - Branch.
+16-handling-error-messages
 
-## Step15 - Branch.
-15-avoiding-race-conditions-with-thunks
-
-## Step15.
-1. Lets see how to avoid race conditions.
-   By passing store.getState as 2nd arg to thunk method, thunk is functionality is available in action creator can get access to the state and find if we are aready fetching. If so, we dont fetch again.
-   By default as this functionality is provided as part of redux-thunk ,we install and use it insdread of our own thunkMiddleware, which we comment here for this step.
-2. Lets take a close look at the return value of the thunk.
-   A thunk doesnt have to return anything.
-   But if a thunk returns a promise its convinient for the calling code to know when the async action creator is done.
-   eg. this.props.loadData(filter).then(() => console.log('loadData is done. Async'));
+## Step16.
+1. Lets see how to handle exceptions.
+2. Lets change {REQUEST_TODOS, RECEIVE_TODOS}  events to { FETCH_TODOS_REQUEST, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE }.
+3. Lets make sure we dont display loading indicator and leave it there in case of failure by updating isFetching flag ot false when we receive FETCH_TODOS_FAILURE.
+4. Lets throw errors randomly in the API to test FETCH_TODOS_FAILURE case.
 

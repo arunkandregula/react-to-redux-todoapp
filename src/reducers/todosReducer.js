@@ -2,11 +2,13 @@ import {combineReducers} from 'redux';
 import byIdsReducer from './byIdsReducer';
 import allIdsReducer from './allIdsReducer';
 import isFetchingByFilterReducer, * as fromIsFetchingByFilter from './isFetchingByFilterReducer';
+import errorMessageByFilterReducer, * as fromErrorMessageByFilter from './errorMessageByFilterReducer';
 
 const todosReducer = combineReducers({
   byIds: byIdsReducer,
   allIds: allIdsReducer,
-  isFetchingByFilter: isFetchingByFilterReducer
+  isFetchingByFilter: isFetchingByFilterReducer,
+  errorMessageByFilter: errorMessageByFilterReducer
 });
 
 export default todosReducer;
@@ -24,4 +26,8 @@ export const getFilteredTodos = (state, filter) => {
 
 export const getIsFetching = (state, filter) => {
   return fromIsFetchingByFilter.getIsFetchingForFilter(state.isFetchingByFilter, filter);
+}
+
+export const getErrorMessageForFilter = (state, filter) => {
+  return fromErrorMessageByFilter.getErrorMessageForFilter(state.errorMessageByFilter, filter);
 }

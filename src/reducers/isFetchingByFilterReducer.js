@@ -9,7 +9,7 @@ const isFetchingByFilterDefaultState = {
 const isFetchingByFilterReducer = (prevState = isFetchingByFilterDefaultState, action) => {
 
   switch (action.type) {
-    case Constants.REQUEST_TODOS:
+    case Constants.FETCH_TODOS_REQUEST:
       switch (action.data.filter) {
         case 'all': return {
           ...prevState,
@@ -27,7 +27,8 @@ const isFetchingByFilterReducer = (prevState = isFetchingByFilterDefaultState, a
           break;
       }
       break;
-    case Constants.RECEIVE_TODOS:
+    case Constants.FETCH_TODOS_SUCCESS:
+    case Constants.FETCH_TODOS_FAILURE:
       switch (action.data.filter) {
         case 'all': return {
           ...prevState,

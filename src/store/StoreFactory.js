@@ -18,7 +18,7 @@ const getDispatchThatLogsState = (store) => (dispatch) => {
 
 const getDispatchThatRecognizePromise = (store)=>(dispatch)=>(action)=>{
   if(typeof action.then === 'function'){
-    action.then((data)=>{
+    return action.then((data)=>{
       dispatch(data);
     });
   } else{
@@ -38,13 +38,13 @@ const configureStore = ()=>{
   const store = createStore(storeReducer);
 
   const middlewares = [getDispatchThatRecognizePromise];
-  
+
   if(process.env.NODE_ENV !== 'production'){
     middlewares.push(getDispatchThatLogsState);
   }
-  
+
   wrapDispatchWithMiddleWare(store, middlewares);
-  
+
   return store;
 };
 

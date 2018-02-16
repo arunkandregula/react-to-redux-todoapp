@@ -3,9 +3,9 @@
 
 ##
 Steps to follow to run the application:
-npm install
-json-server -p 8080 src/data/db.json
-npm start
+1. npm install
+2. json-server -p 8080 src/data/db.json
+3. npm start
 
 ## Current Step:
   Step2.

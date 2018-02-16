@@ -80,7 +80,7 @@ Steps to follow to run the application:
    7. Now TodoApp is a stateless functional component and is so succinct.
       Note the way we accessed context from this stateless component. Stateless functional components can reference context if contextTypes is defined as a property of the function.
 
-## Problems with Step 4.
+## Problems with Step 3.
 1. We are using our own versions of Router and Link, which are very common in almost all applications.
    So lets replace them with versions provided by react-router.
 

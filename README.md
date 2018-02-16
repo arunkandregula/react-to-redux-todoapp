@@ -7,13 +7,6 @@ Steps to follow to run the application:
 2. json-server -p 8080 src/data/db.json
 3. npm start
 
-## Current Step:
-  Step2.
-
-## Current Branch: 02-passing-down-implicitly-via-context
-  Go to Step2 for related ReadMe for this branch.
-
-
 ## Step1 - Branch.
 01-moving-state-to-store
 

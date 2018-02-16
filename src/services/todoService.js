@@ -27,7 +27,7 @@ export default {
       default:
         break;
     }
-    return this.delay(2000)
+    return this.delay(5000)
       .then(() => fetch(url))
       .then((res) => {
         return res.json();

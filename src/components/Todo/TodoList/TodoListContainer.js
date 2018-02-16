@@ -55,7 +55,7 @@ class TodoListWrapper extends React.Component{
     });
     */
     // Approach 2.
-    this.props.loadData(filter);
+    this.props.loadData(filter).then(() => console.log('loadData is done. Async'));
 
   }
 

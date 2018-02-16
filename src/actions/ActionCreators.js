@@ -1,5 +1,6 @@
 import Constants from '../constants/Constants';
 import TodoService from '../services/todoService';
+import { getIsFetching } from '../reducers/storeReducer';
 
 const ActionCreators = {
   getAddTodoThunkAction(text) {
@@ -50,7 +51,14 @@ const ActionCreators = {
   },
 
   getLoadTodosThunkAction(filter) {
-    return (dispatch) => {
+
+    return (dispatch, getState) => {
+
+      // check the isFetching flag foer the filter
+      if (getIsFetching(getState(), filter)) {
+        return Promise.resolve();
+      }
+
       // Step1.
       dispatch({
         type: Constants.REQUEST_TODOS,
@@ -58,7 +66,8 @@ const ActionCreators = {
           filter
         }
       });
-      TodoService.loadTodos(filter).then((data) => {
+
+      return TodoService.loadTodos(filter).then((data) => {
         dispatch({
           type: Constants.RECEIVE_TODOS,
           data: {

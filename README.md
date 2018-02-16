@@ -124,13 +124,6 @@ Again boiler plate props. Lets see how we can directly inject these router param
    to reducer files that define the state shape.
 
 
-## Problems with Step 5.
-1. You can still find some boiler plate in the function mapDispatchToProps. We can remove the boiler plate code.
-2. Components like TodoListContainer has knowledge about state shape as it is filtering todos.
-   That creates tight coupling between components and reducers. So if state shape changes, we have to update these components as well. Its a maintainance nightmare. We can solve it if we move the selectors i.e. methods that select part of the state like (getFilteredItems or getFilteredTodos)
-   to reducer files that define the state shape.
-
-
 ## Step6 - Branch.
 06-colocate-selectors-with-reducers
 
